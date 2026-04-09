@@ -1,0 +1,9 @@
+node_modules/
+.env
+uploads/cars/*.jpg
+uploads/cars/*.png
+uploads/cars/*.webp
+uploads/cars/*.avif
+!uploads/cars/.gitkeep
+
+.vercel

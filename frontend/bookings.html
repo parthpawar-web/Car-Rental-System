@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings - DriveNow</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-brand" onclick="window.location.href='index.html'">
+            <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.08 3.11H5.77L6.85 7zM7.5 17c-.83 0-1.5-.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm9 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+            DriveNow
+        </div>
+        <div id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="cars.html">Cars</a>
+            <a href="bookings.html" class="active" style="color: var(--primary);">My Bookings</a>
+        </div>
+        <div>
+            <button id="logoutBtn" class="btn btn-primary" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="page-header" style="padding: 2.5rem 4rem;">
+        <h1>Your Trips</h1>
+        <p>Manage your upcoming and past reservations</p>
+    </div>
+
+    <div class="container main-content" style="max-width: 1100px;">
+        <div id="bookingsList" style="display: flex; flex-direction: column; gap: 1.75rem;"></div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        checkAuth();
+        loadBookings();
+    </script>
+</body>
+</html>

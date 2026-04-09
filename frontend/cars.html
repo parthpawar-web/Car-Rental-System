@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Fleet - DriveNow</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-brand" onclick="window.location.href='index.html'">
+            <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.08 3.11H5.77L6.85 7zM7.5 17c-.83 0-1.5-.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm9 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+            DriveNow
+        </div>
+        <div id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="cars.html" class="active" style="color: var(--primary);">Cars</a>
+            <a href="bookings.html">My Bookings</a>
+        </div>
+        <div>
+            <button id="logoutBtn" class="btn btn-primary" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>Our Fleet</h1>
+        <p>Browse through our collection of premium vehicles</p>
+    </div>
+
+    <div class="container" style="max-width: 1400px; padding: 2rem;">
+        <section class="main-content" style="width: 100%;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid var(--border-light); padding-bottom: 1rem;">
+                <div class="content-header" id="carsCount" style="margin: 0; font-size: 1.3rem; font-weight: 700; color: var(--text-dark); letter-spacing: -0.5px;">
+                    Loading vehicles...
+                </div>
+                <button id="addCarBtn" class="btn btn-primary" style="display:none; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4); border-radius: 50px; padding: 0.8rem 2rem;" onclick="document.getElementById('addCarForm').classList.toggle('hidden')">
+                    + List a Vehicle
+                </button>
+            </div>
+            
+            <div id="addCarForm" class="hidden" style="background: white; padding: 2rem; border-radius: 16px; border: 1px solid var(--border-light); margin-bottom: 3rem; box-shadow: var(--shadow-lg);">
+                <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem; color: var(--primary);">Vehicle Details</h3>
+                <form id="carForm" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div class="form-group" style="margin:0;"><input type="text" id="carName" placeholder="Model (e.g. Range Rover Sport)" required style="padding: 1rem; border-radius: 10px;"></div>
+                    <div class="form-group" style="margin:0;"><input type="text" id="carBrand" placeholder="Brand (e.g. Land Rover)" required style="padding: 1rem; border-radius: 10px;"></div>
+                    <div class="form-group" style="margin:0;"><input type="number" id="carPrice" placeholder="Price Per Day (₹)" required style="padding: 1rem; border-radius: 10px;"></div>
+                    <div class="form-group" style="margin:0;">
+                        <select id="carCategory" style="padding: 1rem; border-radius: 10px;">
+                            <option value="Sedan">Sedan</option>
+                            <option value="SUV">SUV</option>
+                            <option value="Hatchback">Hatchback</option>
+                            <option value="Sports">Sports</option>
+                            <option value="Luxury">Luxury</option>
+                            <option value="Convertible">Convertible</option>
+                            <option value="Electric">Electric</option>
+                            <option value="Minivan">Minivan</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin:0;">
+                        <select id="carSeats" style="padding: 1rem; border-radius: 10px;">
+                            <option value="2">2 Seater</option>
+                            <option value="4">4 Seater</option>
+                            <option value="5" selected>5 Seater</option>
+                            <option value="7">7 Seater</option>
+                            <option value="8">8 Seater</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin:0;">
+                        <select id="carFuel" style="padding: 1rem; border-radius: 10px;">
+                            <option value="Petrol">Petrol</option>
+                            <option value="Diesel">Diesel</option>
+                            <option value="Electric">Electric</option>
+                            <option value="Hybrid">Hybrid</option>
+                            <option value="CNG">CNG</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin:0;">
+                        <select id="carTransmission" style="padding: 1rem; border-radius: 10px;">
+                            <option value="Manual">Manual</option>
+                            <option value="Automatic">Automatic</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin:0; grid-column: 1 / -1;"><input type="file" id="carImage" accept="image/*" style="padding: 1rem; border: dashed 2px var(--border-light); border-radius: 10px; cursor: pointer; background: #f9fafb;"></div>
+                    <button type="submit" class="btn btn-primary" style="grid-column: 1 / -1; padding: 1rem; border-radius: 10px; font-size: 1.1rem; margin-top: 1rem;">List Vehicle</button>
+                </form>
+            </div>
+
+            <div id="carsList" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem;"></div>
+        </section>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        checkAuth();
+        loadCars();
+    </script>
+</body>
+</html>

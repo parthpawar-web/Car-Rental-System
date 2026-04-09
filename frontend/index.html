@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveNow - Premium Car Rental</title>
+    <meta name="description" content="Rent premium cars at best prices. Wide selection of vehicles for any occasion.">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="nav-brand" onclick="window.location.href='index.html'">
+            <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.08 3.11H5.77L6.85 7zM7.5 17c-.83 0-1.5-.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm9 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+            DriveNow
+        </div>
+        <div id="navLinks">
+            <a href="index.html" class="active">Home</a>
+            <a href="cars.html">Cars</a>
+            <a href="bookings.html">My Bookings</a>
+        </div>
+        <div>
+            <button id="logoutBtn" style="display:none;" class="btn btn-primary" onclick="logout()">Logout</button>
+            <button id="navLoginBtn" class="btn btn-primary" onclick="document.getElementById('authCards').scrollIntoView({behavior:'smooth'})">Sign In</button>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div style="position: relative; z-index: 3;">
+            <h1 class="reveal" style="margin-top: 1rem;">Find Your Perfect Ride</h1>
+            <p class="reveal" style="transition-delay: 0.1s;">Rent premium cars at the best prices. Choose from our wide selection of vehicles for any occasion.</p>
+        </div>
+
+        <div class="hero-car-wrapper float-anim" style="height: 450px;">
+            <model-viewer 
+                src="https://raw.githubusercontent.com/mrdoob/three.js/master/examples/models/gltf/ferrari.glb" 
+                camera-controls 
+                auto-rotate 
+                rotation-per-second="10deg"
+                shadow-intensity="1.5" 
+                exposure="1.2"
+                environment-image="neutral"
+                disable-zoom
+                camera-orbit="45deg 75deg 5m"
+                style="width: 100%; height: 100%; background: transparent; --poster-color: transparent;"
+            ></model-viewer>
+        </div>
+
+        <div class="search-container reveal" style="position: relative; z-index: 3; transition-delay: 0.2s;">
+            <div class="search-field">
+                <label>Location</label>
+                <div class="search-input-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    <input type="text" placeholder="Enter city">
+                </div>
+            </div>
+            <div class="search-field">
+                <label>Pick-up Date</label>
+                <div class="search-input-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    <input type="text" placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')">
+                </div>
+            </div>
+            <div class="search-field">
+                <label>Return Date</label>
+                <div class="search-input-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    <input type="text" placeholder="dd/mm/yyyy" onfocus="(this.type='date')" onblur="(this.type='text')">
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="window.location.href='cars.html'">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                Search
+            </button>
+        </div>
+
+        <div class="hero-metrics reveal" style="position: relative; z-index: 3; transition-delay: 0.3s;">
+            <div class="metric-item"><h3>500+</h3><p>Premium Cars</p></div>
+            <div class="metric-item"><h3>50+</h3><p>Locations</p></div>
+            <div class="metric-item"><h3>10K+</h3><p>Happy Customers</p></div>
+            <div class="metric-item"><h3>4.8</h3><p>Average Rating</p></div>
+        </div>
+    </div>
+
+    <!-- NEW Featured Section -->
+    <div class="container" style="margin-top: 5rem; margin-bottom: 5rem;">
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <h2 class="reveal" style="font-size: 2.5rem; margin-bottom: 1rem;">Experience Excellence</h2>
+            <p class="reveal" style="color: var(--text-muted); max-width: 600px; margin: 0 auto; transition-delay: 0.1s;">Select from our most popular premium vehicles, meticulously maintained for your comfort and style.</p>
+        </div>
+        <div id="featuredCars" class="reveal" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2.5rem; padding: 1rem 0; transition-delay: 0.2s;">
+            <!-- Will be populated by JS -->
+            <div style="text-align: center; grid-column: 1 / -1; padding: 3rem; color: var(--text-muted);">
+                Discovering our prime collection...
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <button class="btn btn-primary reveal" style="padding: 0.9rem 2.5rem; transition-delay: 0.3s;" onclick="window.location.href='cars.html'">
+                View Full Fleet
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="container" id="authCards">
+        <div class="auth-container" id="authSection">
+            <div class="auth-card">
+                <h2>Login</h2>
+                <form id="loginForm" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="loginEmail" placeholder="name@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="loginPassword" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+                </form>
+            </div>
+            <div class="auth-card">
+                <h2>Register</h2>
+                <form id="registerForm" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="regName" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="regEmail" placeholder="name@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="regPassword" placeholder="••••••••" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Account Type</label>
+                        <select id="regRole">
+                            <option value="USER">Driver</option>
+                            <option value="OWNER">Car Owner</option>
+                            <option value="ADMIN">Admin</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        if (localStorage.getItem('token')) {
+            const authSection = document.getElementById('authSection');
+            if(authSection) authSection.style.display = 'none';
+
+            const logoutBtn = document.getElementById('logoutBtn');
+            if(logoutBtn) logoutBtn.style.display = 'inline-flex';
+
+            const navLoginBtn = document.getElementById('navLoginBtn');
+            if(navLoginBtn) navLoginBtn.style.display = 'none';
+        }
+    </script>
+</body>
+</html>             

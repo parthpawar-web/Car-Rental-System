@@ -1,0 +1,986 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900&display=swap');
+
+/* ===================== */
+/* DESIGN TOKENS         */
+/* ===================== */
+:root {
+    --primary: #7c3aed;
+    --primary-hover: #6d28d9;
+    --primary-light: #ede9fe;
+    --primary-glow: rgba(124, 58, 237, 0.25);
+    --accent: #06b6d4;
+    --hero-start: #3b0764;
+    --hero-end: #1e1b4b;
+    --hero-bg-gradient: linear-gradient(135deg, #3b0764 0%, #1e1b4b 100%);
+    --text-dark: #0f172a;
+    --text-mid: #334155;
+    --text-muted: #64748b;
+    --bg-page: #f8fafc;
+    --bg-card: #ffffff;
+    --border-light: #e2e8f0;
+    --border-mid: #cbd5e1;
+    --white: #ffffff;
+
+    /* Shadows */
+    --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 40px rgba(0,0,0,0.1);
+    --shadow-xl: 0 20px 60px rgba(0,0,0,0.12);
+    --shadow-primary: 0 8px 25px var(--primary-glow);
+
+    /* Radii */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+
+    /* Transitions */
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ===================== */
+/* BASE                  */
+/* ===================== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    background-color: var(--bg-page);
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+img { max-width: 100%; }
+
+/* ===================== */
+/* NAVBAR                */
+/* ===================== */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 4rem;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 4px 24px rgba(0,0,0,0.03);
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--text-dark);
+    cursor: pointer;
+    letter-spacing: -0.03em;
+    transition: var(--transition);
+}
+
+.nav-brand:hover { opacity: 0.8; }
+
+.nav-brand svg {
+    width: 30px;
+    height: 30px;
+    fill: var(--primary);
+    filter: drop-shadow(0 2px 6px var(--primary-glow));
+}
+
+#navLinks {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+}
+
+#navLinks a {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-full);
+    transition: var(--transition);
+}
+
+#navLinks a:hover {
+    color: var(--primary);
+    background: var(--primary-light);
+}
+
+#navLinks a.active {
+    color: var(--primary);
+    background: var(--primary-light);
+    font-weight: 600;
+}
+
+/* ===================== */
+/* BUTTONS               */
+/* ===================== */
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.7rem 1.5rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    gap: 0.5rem;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, #6d28d9 100%);
+    color: white;
+    box-shadow: var(--shadow-primary), 0 2px 8px rgba(124,58,237,0.15);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px var(--primary-glow), 0 2px 8px rgba(124,58,237,0.15);
+    filter: brightness(1.08);
+}
+
+.btn-primary:active { transform: translateY(0); }
+
+/* ===================== */
+/* HERO SECTION          */
+/* ===================== */
+.hero {
+    background: var(--hero-bg-gradient);
+    color: var(--white);
+    text-align: center;
+    padding: 6rem 2rem 9rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Starfield dots effect */
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,255,255,0.06) 1.5px, transparent 1.5px);
+    background-size: 50px 50px, 100px 100px;
+    background-position: 0 0, 25px 25px;
+    pointer-events: none;
+}
+
+/* Purple glow orbs */
+.hero::after {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(139,92,246,0.3) 0%, transparent 70%);
+    top: -200px;
+    right: -200px;
+    pointer-events: none;
+}
+
+.hero h1 {
+    color: var(--white);
+    font-size: 3.75rem;
+    margin-bottom: 1.25rem;
+    max-width: 780px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(to bottom right, #ffffff 40%, rgba(255,255,255,0.7));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 550px;
+    margin-bottom: 3rem;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===================== */
+/* SEARCH BAR (HERO)     */
+/* ===================== */
+.search-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 0.75rem;
+    border-radius: var(--radius-xl);
+    display: flex;
+    gap: 0.5rem;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.1);
+    width: 100%;
+    max-width: 900px;
+    margin-top: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.search-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 0.6rem 1rem;
+    border: 1.5px solid transparent;
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    cursor: text;
+}
+
+.search-field:focus-within {
+    border-color: var(--primary);
+    background: var(--primary-light);
+}
+
+.search-field label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.search-input-wrapper svg {
+    width: 15px;
+    height: 15px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.search-input-wrapper input {
+    border: none;
+    outline: none;
+    width: 100%;
+    color: var(--text-mid);
+    font-size: 0.92rem;
+    background: transparent;
+    font-weight: 500;
+}
+
+.search-container .btn-primary {
+    padding: 0 2rem;
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    gap: 0.5rem;
+}
+
+/* ===================== */
+/* HERO METRICS          */
+/* ===================== */
+.hero-metrics {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    margin-top: 5rem;
+    position: relative;
+    z-index: 1;
+    padding: 2.5rem 4rem;
+    background: rgba(255,255,255,0.04);
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+}
+
+.metric-item h3 {
+    font-size: 2.75rem;
+    font-weight: 900;
+    color: var(--white);
+    margin-bottom: 0.25rem;
+    letter-spacing: -0.04em;
+    background: linear-gradient(to right, #fff, rgba(255,255,255,0.8));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.metric-item p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+/* ===================== */
+/* PAGE HEADER           */
+/* ===================== */
+.page-header {
+    background: var(--hero-bg-gradient);
+    color: white;
+    padding: 3.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+.page-header h1 {
+    color: white;
+    font-size: 2.75rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+    font-weight: 900;
+}
+
+.page-header p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===================== */
+/* LAYOUT                */
+/* ===================== */
+.container {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+.two-col-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+/* ===================== */
+/* SIDEBAR               */
+/* ===================== */
+.sidebar {
+    width: 250px;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-light);
+    flex-shrink: 0;
+}
+
+.sidebar h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-dark);
+}
+
+.filter-group { margin-bottom: 1.5rem; }
+
+.filter-group h4 {
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    margin-bottom: 0.8rem;
+}
+
+.radio-list label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.radio-list label:hover { color: var(--primary); }
+.radio-list input[type="radio"] { accent-color: var(--primary); }
+
+.price-inputs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.price-inputs input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1.5px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    outline: none;
+    transition: var(--transition);
+}
+
+.price-inputs input:focus { border-color: var(--primary); }
+
+/* ===================== */
+/* MAIN CONTENT          */
+/* ===================== */
+.main-content {
+    flex: 1;
+    width: 100%;
+}
+
+.content-header {
+    margin-bottom: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* ===================== */
+/* CAR CARDS             */
+/* ===================== */
+#carsList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2.5rem;
+    padding: 1rem 0;
+}
+
+.car-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04), inset 0 0 0 1px rgba(255,255,255,0.5);
+    border: 1px solid rgba(124, 58, 237, 0.1);
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s ease;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.car-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(124,58,237,0.05) 0%, transparent 60%);
+    opacity: 0;
+    transition: var(--transition-spring);
+    z-index: 0;
+    border-radius: var(--radius-xl);
+}
+
+.car-card:hover {
+    box-shadow: 0 25px 50px rgba(124,58,237,0.25), 0 0 0 2px rgba(124,58,237,0.3);
+}
+
+.car-card:hover::before { opacity: 1; }
+
+.car-card-img {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 50%, #f8fafc 0%, #eef2ff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border-bottom: 2px solid rgba(124, 58, 237, 0.05);
+}
+
+/* Add a glowing orb behind the car image */
+.car-card-img::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.car-card-img img {
+    width: 110%;
+    height: 110%;
+    object-fit: contain;
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    filter: drop-shadow(0 15px 35px rgba(0,0,0,0.2));
+    position: relative;
+    z-index: 1;
+}
+
+.car-card:hover .car-card-img img {
+    transform: scale(1.12) translateY(-8px) rotate(-1deg);
+}
+
+.car-badge {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    z-index: 10;
+    background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.7));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 0.4rem 1.1rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    box-shadow: 0 4px 15px rgba(124,58,237,0.15), inset 0 0 0 1px rgba(255,255,255,0.5);
+}
+
+.car-card-body {
+    padding: 1.75rem;
+    background: transparent;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.car-card-title {
+    font-size: 1.4rem;
+    font-weight: 900;
+    margin-bottom: 0.4rem;
+    color: var(--text-dark);
+    letter-spacing: -0.04em;
+    background: linear-gradient(to right, var(--text-dark), var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.car-card-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.car-card-rating svg {
+    width: 16px;
+    height: 16px;
+    fill: #f59e0b;
+    filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.3));
+}
+
+.car-specs {
+    display: flex;
+    gap: 0.8rem;
+    margin-bottom: 1.75rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    flex-wrap: wrap;
+}
+
+.car-spec-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(124, 58, 237, 0.04);
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(124, 58, 237, 0.08);
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.car-card:hover .car-spec-item {
+    background: rgba(124, 58, 237, 0.08);
+    transform: translateY(-2px);
+}
+
+.car-spec-item svg {
+    width: 14px;
+    height: 14px;
+    color: var(--primary);
+}
+
+.car-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    border-top: 1.5px dashed var(--border-light);
+    margin-top: auto;
+}
+
+.car-price-block { display: flex; flex-direction: column; }
+
+.car-price {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--primary);
+    letter-spacing: -0.05em;
+    display: flex;
+    align-items: baseline;
+    gap: 0.2rem;
+}
+
+.car-price span {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0;
+}
+
+/* Book button on card */
+.car-card .btn-primary {
+    padding: 0.7rem 1.4rem;
+    font-size: 0.9rem;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, var(--primary) 0%, #6d28d9 100%);
+    box-shadow: 0 4px 15px rgba(124,58,237,0.25);
+    transition: var(--transition);
+}
+
+.car-card:hover .btn-primary {
+    box-shadow: 0 8px 25px rgba(124,58,237,0.4);
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+/* ===================== */
+/* DETAIL / BOOKING VIEW */
+/* ===================== */
+.detail-layout {
+    display: grid;
+    grid-template-columns: 1.8fr 1.2fr;
+    gap: 2.5rem;
+    align-items: start;
+}
+
+.detail-img-card {
+    background: linear-gradient(to bottom right, #ffffff, #f8fafc);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(0,0,0,0.04);
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-img-card img {
+    width: 100%;
+    height: 400px;
+    object-fit: contain;
+    margin-bottom: 2rem;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
+    transition: transform 0.5s ease;
+}
+
+.detail-img-card img:hover {
+    transform: scale(1.02) translateY(-4px);
+}
+
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.detail-info {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+}
+
+.booking-form-card {
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(0,0,0,0.05);
+    position: sticky;
+    top: 6rem;
+    overflow: hidden;
+}
+
+.booking-form-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+.booking-form-card h3 {
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--text-dark);
+}
+
+/* ===================== */
+/* FORMS                 */
+/* ===================== */
+.form-group { margin-bottom: 1.1rem; }
+
+.form-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1.5px solid var(--border-light);
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    outline: none;
+    transition: var(--transition);
+    background: var(--bg-page);
+    font-family: inherit;
+    appearance: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.booking-price-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.5rem 0;
+    padding: 1rem 1.25rem;
+    background: var(--primary-light);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(124,58,237,0.15);
+}
+
+.booking-price-total span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.booking-price-total strong {
+    color: var(--primary);
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+}
+
+.booking-form-card .btn-primary {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: var(--radius-md);
+    margin-top: 0.5rem;
+}
+
+/* ===================== */
+/* AUTH CARDS            */
+/* ===================== */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    margin: 3rem auto;
+    flex-wrap: wrap;
+}
+
+.auth-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    width: 400px;
+    border: 1px solid var(--border-light);
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+.auth-card h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.6rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary), #6d28d9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ===================== */
+/* UTILITIES             */
+/* ===================== */
+.hidden { display: none !important; }
+
+/* ===================== */
+/* ANIMATIONS            */
+/* ===================== */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4); }
+    70% { box-shadow: 0 0 0 20px rgba(124, 58, 237, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); }
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.reveal-left.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.reveal-right.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.float-anim {
+    animation: float 6s ease-in-out infinite;
+}
+
+.car-card {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.car-card.reveal-active {
+    animation: fadeInUp 0.6s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-page); }
+::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ===================== */
+/* HERO 3D CAR           */
+/* ===================== */
+.hero-car-wrapper {
+    width: 100%;
+    max-width: 900px;
+    margin: -1rem auto -120px;
+    position: relative;
+    z-index: 2;
+    cursor: grab;
+}
+
+.hero-car-wrapper:active {
+    cursor: grabbing;
+}
